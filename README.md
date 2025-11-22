@@ -36,39 +36,39 @@
 
 ### ✨ Highlights
 
-- 🔐 **Autentikasi & Otorisasi** - Sistem login yang aman dengan session management
-- 👥 **Multi-Role System** - Pembagian akses Admin dan Customer yang jelas
-- 📊 **Dashboard Analytics** - Statistik real-time untuk monitoring bisnis
-- 🛍️ **CRUD Operations** - Manajemen lengkap untuk Customers, Products, dan Transactions
-- 🎨 **Modern UI/UX** - Antarmuka responsif dengan Bootstrap 5
-- ⚡ **Async Operations** - Komunikasi client-server menggunakan Fetch API
+- **Autentikasi & Otorisasi** - Sistem login yang aman dengan session management
+- **Multi-Role System** - Pembagian akses Admin dan Customer yang jelas
+- **Dashboard Analytics** - Statistik real-time untuk monitoring bisnis
+- **CRUD Operations** - Manajemen lengkap untuk Customers, Products, dan Transactions
+- **Modern UI/UX** - Antarmuka responsif dengan Bootstrap 5
+- **Async Operations** - Komunikasi client-server menggunakan Fetch API
 
 ---
 
-## 🎯 Fitur Utama
+## FITUR UTAMA
 
 <table>
 <tr>
 <td width="50%">
 
-### 👨‍💼 Admin Features
-- ✅ Dashboard dengan statistik lengkap
-- ✅ Manajemen data Customer (CRUD)
-- ✅ Manajemen data Product (CRUD)
-- ✅ Manajemen data Transaction
-- ✅ Monitoring aktivitas sistem
-- ✅ Akses penuh ke semua modul
+### Admin Features
+-  Dashboard dengan statistik lengkap
+-  Manajemen data Customer (CRUD)
+-  Manajemen data Product (CRUD)
+-  Manajemen data Transaction
+-  Monitoring aktivitas sistem
+-  Akses penuh ke semua modul
 
 </td>
 <td width="50%">
 
-### 🛒 Customer Features
-- ✅ Registrasi & Login akun
-- ✅ Melihat katalog produk
-- ✅ Melakukan pemesanan
-- ✅ Riwayat transaksi pribadi
-- ✅ Update profil akun
-- ✅ Dashboard personal
+###  FITUR CUSTOMER
+-  Registrasi & Login akun
+-  Melihat katalog produk
+-  Melakukan pemesanan
+-  Riwayat transaksi pribadi
+-  Update profil akun
+-  Dashboard personal
 
 </td>
 </tr>
@@ -76,15 +76,15 @@
 
 ---
 
-## 🏗️ Arsitektur Sistem
+## GAMBARAN ARSITEKTUR
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
+┌───────────────────────────────────────────────────────────────── ┐
 │                        CLIENT LAYER                              │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
-│  │    HTML     │  │     CSS     │  │ JavaScript  │              │
-│  │  (Views)    │  │ (Bootstrap) │  │ (Fetch API) │              │
-│  └──────┬──────┘  └─────────────┘  └──────┬──────┘              │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐               │
+│  │    HTML     │  │     CSS     │  │ JavaScript  │               │
+│  │  (Views)    │  │ (Bootstrap) │  │ (Fetch API) │               │
+│  └──────┬──────┘  └─────────────┘  └──────┬──────┘               │
 │         │                                  │                     │
 │         └──────────────┬───────────────────┘                     │
 │                        │ HTTP Request/Response                   │
@@ -93,33 +93,33 @@
 ┌────────────────────────┼─────────────────────────────────────────┐
 │                        ▼                                         │
 │                  SERVER LAYER                                    │
-│  ┌─────────────────────────────────────────────────────────┐    │
-│  │                    Flask Application                     │    │
-│  │  ┌───────────┐  ┌───────────┐  ┌───────────────────┐   │    │
-│  │  │  Routes   │  │Blueprints │  │   Middleware      │   │    │
-│  │  │ (API)     │  │ (Modules) │  │ (Auth/Validation) │   │    │
-│  │  └─────┬─────┘  └─────┬─────┘  └─────────┬─────────┘   │    │
-│  │        │              │                  │              │    │
-│  │        └──────────────┼──────────────────┘              │    │
-│  │                       │                                 │    │
-│  └───────────────────────┼─────────────────────────────────┘    │
+│  ┌─────────────────────────────────────────────────────────┐     │
+│  │                    Flask Application                    │     │
+│  │  ┌───────────┐  ┌───────────┐  ┌───────────────────┐    │     │
+│  │  │  Routes   │  │Blueprints │  │   Middleware      │    │     │
+│  │  │ (API)     │  │ (Modules) │  │ (Auth/Validation) │    │     │
+│  │  └─────┬─────┘  └─────┬─────┘  └─────────┬─────────┘    │     │
+│  │        │              │                  │              │     │
+│  │        └──────────────┼──────────────────┘              │     │
+│  │                       │                                 │     │
+│  └───────────────────────┼─────────────────────────────────┘     │
 │                          │                                       │
 └──────────────────────────┼───────────────────────────────────────┘
                            │
 ┌──────────────────────────┼───────────────────────────────────────┐
 │                          ▼                                       │
 │                   DATABASE LAYER                                 │
-│  ┌─────────────────────────────────────────────────────────┐    │
-│  │                      MySQL 8.0                           │    │
-│  │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐   │    │
-│  │  │  users   │ │ products │ │customers │ │transactions│  │    │
-│  │  └──────────┘ └──────────┘ └──────────┘ └──────────┘   │    │
-│  └─────────────────────────────────────────────────────────┘    │
+│  ┌─────────────────────────────────────────────────────────┐     │
+│  │                      MySQL 8.0                          │     │
+│  │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐    │     │
+│  │  │  users   │ │ products │ │customers │ │transacti.│    │     │
+│  │  └──────────┘ └──────────┘ └──────────┘ └──────────┘    │     │
+│  └─────────────────────────────────────────────────────────┘     │
 │                                                                  │
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-### 📐 Design Pattern: MVP (Model-View-Presenter)
+### Design Pattern: Model-View-Presenter
 
 | Layer | Teknologi | Deskripsi |
 |-------|-----------|-----------|
@@ -139,16 +139,16 @@ Pastikan sistem Anda sudah terinstall:
 - ![MySQL](https://img.shields.io/badge/MySQL-8.0-orange?logo=mysql&logoColor=white) MySQL Server 8.0
 - ![Git](https://img.shields.io/badge/Git-latest-red?logo=git&logoColor=white) Git (opsional)
 
-### 📥 Instalasi
+### How to Install on Windows:
 
-**1️⃣ Clone Repository**
+**1️ Clone Repository**
 
 ```bash
 git clone https://github.com/username/waow-season6.git
 cd waow-season6
 ```
 
-**2️⃣ Buat Virtual Environment**
+**2 Buat Virtual Environment**
 
 ```bash
 # Windows
@@ -160,13 +160,13 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-**3️⃣ Install Dependencies**
+**3️ Install Dependencies**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-**4️⃣ Setup Database**
+**4️ Setup Database**
 
 ```bash
 # Login ke MySQL
@@ -180,9 +180,9 @@ USE myshop;
 source MyShop.sql;
 ```
 
-**5️⃣ Konfigurasi Environment**
+**5️ Konfigurasi Environment**
 
-Buat file `config/database.py` atau sesuaikan konfigurasi:
+Buat file `config/database.py` atau sesuaikan konfigurasi dengan localhost dan root masing-masing:
 
 ```python
 DB_CONFIG = {
@@ -193,28 +193,28 @@ DB_CONFIG = {
 }
 ```
 
-**6️⃣ Jalankan Aplikasi**
+**6️ Jalankan Aplikasi**
 
 ```bash
 python app.py
 ```
 
-**7️⃣ Akses Aplikasi**
+**7️ Akses Aplikasi**
 
 ```
-🌐 http://127.0.0.1:5000
+🌐 DEFAULT: http://127.0.0.1:5000
 ```
 
 ---
 
-## 📖 Dokumentasi API
+## Dokumentasi API
 
-### 🔑 Authentication Endpoints
+### Authentication Endpoints
 
 <details>
 <summary><code>POST</code> <code>/api/auth/register</code> - Registrasi User Baru</summary>
 
-#### Request Body
+#### Request Body (inspect in Postman)
 
 ```json
 {
@@ -266,7 +266,7 @@ python app.py
 
 ---
 
-### 👥 Customer Endpoints
+### Customer Endpoints
 
 | Method | Endpoint | Deskripsi | Auth |
 |--------|----------|-----------|------|
@@ -362,31 +362,31 @@ python app.py
 
 ---
 
-### 📦 Product Endpoints
+### Product Endpoints
 
 | Method | Endpoint | Deskripsi | Auth |
 |--------|----------|-----------|------|
-| `GET` | `/api/admin/products/` | Ambil semua produk | ✅ Admin |
-| `GET` | `/api/admin/products/:id` | Ambil produk by ID | ✅ Admin |
-| `POST` | `/api/admin/products/` | Tambah produk baru | ✅ Admin |
-| `PUT` | `/api/admin/products/:id` | Update produk | ✅ Admin |
-| `DELETE` | `/api/admin/products/:id` | Hapus produk | ✅ Admin |
+| `GET` | `/api/admin/products/` | Ambil semua produk |  Admin |
+| `GET` | `/api/admin/products/:id` | Ambil produk by ID |  Admin |
+| `POST` | `/api/admin/products/` | Tambah produk baru |  Admin |
+| `PUT` | `/api/admin/products/:id` | Update produk |  Admin |
+| `DELETE` | `/api/admin/products/:id` | Hapus produk |  Admin |
 
 ---
 
-### 💳 Transaction Endpoints
+### Transaction Endpoints
 
 | Method | Endpoint | Deskripsi | Auth |
 |--------|----------|-----------|------|
-| `GET` | `/api/admin/transactions/` | Ambil semua transaksi | ✅ Admin |
-| `GET` | `/api/admin/transactions/:id` | Detail transaksi | ✅ Admin |
-| `POST` | `/api/admin/transactions/` | Buat transaksi baru | ✅ All |
+| `GET` | `/api/admin/transactions/` | Ambil semua transaksi |  Admin |
+| `GET` | `/api/admin/transactions/:id` | Detail transaksi |  Admin |
+| `POST` | `/api/admin/transactions/` | Buat transaksi baru |  All |
 
 ---
 
-## 🗄️ Database Schema
+## REVIEW DATABASE MYSQL SCHEMA 
 
-```sql
+```View:
 ┌─────────────────┐       ┌─────────────────┐
 │    role_user    │       │      users      │
 ├─────────────────┤       ├─────────────────┤
@@ -426,92 +426,8 @@ python app.py
 
 ---
 
-## 📁 Struktur Proyek
 
-```
-waow-season6/
-│
-├── 📁 config/
-│   └── database.py          # Konfigurasi database
-│
-├── 📁 routes/
-│   ├── __init__.py
-│   ├── auth.py              # Auth endpoints
-│   ├── customers.py         # Customer CRUD
-│   ├── products.py          # Product CRUD
-│   └── transactions.py      # Transaction handling
-│
-├── 📁 static/
-│   ├── 📁 css/
-│   │   └── style.css        # Custom styles
-│   └── 📁 js/
-│       ├── script.js        # Auth & session management
-│       ├── customers.js     # Customer operations
-│       ├── products.js      # Product operations
-│       └── main.js          # Dashboard scripts
-│
-├── 📁 templates/
-│   ├── 📁 auth/
-│   │   ├── login.html
-│   │   └── register.html
-│   ├── 📁 admin/
-│   │   ├── index.html
-│   │   ├── manage_customer.html
-│   │   ├── manage_product.html
-│   │   └── transactions.html
-│   └── 📁 customer/
-│       └── dashboard.html
-│
-├── app.py                   # Entry point aplikasi
-├── requirements.txt         # Python dependencies
-├── MyShop.sql              # Database schema
-└── README.md               # Dokumentasi (You are here!)
-```
-
----
-
-## 🔒 Sistem Keamanan
-
-### Session Management
-
-```javascript
-// Session disimpan di localStorage dengan expiry time
-{
-    "userId": 1,
-    "name": "John Doe",
-    "roleId": 1,
-    "loginTime": "2025-01-15T10:30:00",
-    "expiresAt": "2025-01-16T10:30:00"  // 24 jam
-}
-```
-
-### Route Protection
-
-| Route Pattern | Access Level | Redirect if Unauthorized |
-|---------------|--------------|--------------------------|
-| `/auth/*` | Public | Dashboard (jika sudah login) |
-| `/admin/*` | Admin Only | Login page |
-| `/customer/*` | Customer Only | Login page |
-
----
-
-## 🛠️ Tech Stack
-
-<div align="center">
-
-| Category | Technology |
-|----------|------------|
-| **Backend** | ![Flask](https://img.shields.io/badge/Flask-000000?style=flat-square&logo=flask&logoColor=white) |
-| **Database** | ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white) |
-| **Frontend** | ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) |
-| **UI Framework** | ![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=flat-square&logo=bootstrap&logoColor=white) |
-| **Icons** | ![Bootstrap Icons](https://img.shields.io/badge/Bootstrap%20Icons-7952B3?style=flat-square&logo=bootstrap&logoColor=white) |
-
-</div>
-
----
-
-## 📸 Screenshots
+## Screenshots
 
 <div align="center">
 
@@ -525,21 +441,6 @@ waow-season6/
 
 </div>
 
----
-
-## 🤝 Kontributor
-
-<div align="center">
-
-| Role | Name |
-|------|------|
-| 👨‍💻 Developer | Your Name |
-| 🎨 UI/UX | Your Name |
-| 📝 Documentation | Your Name |
-
-</div>
-
----
 
 ## 📄 License
 
@@ -548,24 +449,13 @@ MIT License
 
 Copyright (c) 2025 CODER Telkom University Surabaya
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
+Free of charge, to any person obtaining a copy of this software
+and associated documentation files (the "Software"), to deal in the
+ Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software...
 ```
-
----
-
-<div align="center">
-
-### ⭐ Star this repository if you find it helpful!
-
-**Made with ❤️ by CODER Telkom University Surabaya**
-
-[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/powered-by-coffee.svg)](https://forthebadge.com)
-
+THANK YOU
 ---
 
 *"The only way to learn programming is by writing code." - Dennis Ritchie*

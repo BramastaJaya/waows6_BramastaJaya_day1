@@ -422,7 +422,3 @@ python app.py
 ```
 
 ---
-
-
-## Screenshots
-

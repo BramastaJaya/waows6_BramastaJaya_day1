@@ -1,39 +1,49 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect,url_for
 from flask_cors import CORS
 from config.database import test_connection
 from routes.customers import customers_bp
 from routes.products import products_bp
 from routes.transactions import transactions_bp
-
+from routes.auth import auth_bp
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
-
-# Register blueprints
-app.register_blueprint(customers_bp, url_prefix='/api/customers')
-app.register_blueprint(products_bp, url_prefix='/api/products')
-app.register_blueprint(transactions_bp, url_prefix='/api/transactions')
+CORS(app) 
+app.register_blueprint(customers_bp, url_prefix='/api/admin/customers')
+app.register_blueprint(products_bp, url_prefix='/api/admin/products')
+app.register_blueprint(transactions_bp, url_prefix='/api/admin/transactions')
+app.register_blueprint(auth_bp, url_prefix = '/api/auth')
 
 @app.route('/')
-def index():
-    """Landing page"""
+def landingPage():
+    return redirect(url_for('loginPage'))
+
+@app.route('/auth/login')
+def loginPage():
+    return render_template('login.html')
+
+@app.route('/auth/register')
+def registerPage():
+    return render_template('register.html')
+
+@app.route('/admin')
+def adminPage():
     return render_template('index.html')
 
-@app.route('/customers-page')
-def customers_page():
-    """Customers management page"""
-    return render_template('customers.html')
+#routes to customer page
+@app.route('/admin/customers')
+def manage_customer():
+    return render_template('manage_customer.html')
 
-@app.route('/products-page')
+#routes to producs list page
+@app.route('/admin/products')
 def products_page():
-    """Products management page"""
-    return render_template('products.html')
+    return render_template('manage_products.html')
 
-@app.route('/transactions-page')
+#route to history of transactions 
+@app.route('/admin/transactions')
 def transactions_page():
-    """Transactions view page"""
-    return render_template('transactions.html')
+    return render_template('manage_transactions.html')
 
-@app.route('/health')
+@app.route('/admin/health')
 def health():
     """Health check endpoint"""
     db_status = test_connection()
@@ -43,14 +53,4 @@ def health():
     }
 
 if __name__ == '__main__':
-    print("\n" + "="*50)
-    print("🚀 WAOW Season 6 - Flask Workshop")
-    print("="*50)
-    print("📍 Server running on: http://127.0.0.1:5000")
-    print("🔗 API endpoints:")
-    print("   - Customers: http://127.0.0.1:5000/api/customers")
-    print("   - Products: http://127.0.0.1:5000/api/products")
-    print("   - Transactions: http://127.0.0.1:5000/api/transactions")
-    print("="*50 + "\n")
-    
-    app.run(debug=True, host='0.0.0.0', port=4500)
+    app.run(debug=True, host='127.0.0.1', port=5000)

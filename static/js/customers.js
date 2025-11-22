@@ -2,7 +2,7 @@
 // WAOW Season 6 - Customers JavaScript
 // ========================================
 
-const API_BASE_URL = 'http://127.0.0.1:5000/api';
+const API_BASE_URL = 'http://127.0.0.1:5000/api/admin';
 
 // ========================================
 // Load Customers
@@ -18,12 +18,13 @@ async function loadCustomers() {
             tableBody.innerHTML = data.data.map(customer => `
                 <tr>
                     <td>${customer.CustomerID}</td>
+                    <td>${customer.Name}</td>
                     <td>
                         <i class="bi bi-${customer.Gender === 'Male' ? 'gender-male text-primary' : 'gender-female text-danger'}"></i>
                         ${customer.Gender}
                     </td>
                     <td>${customer.Age}</td>
-                    <td>$${customer.Annual_Income}K</td>
+                    <td>$${customer.Annual_Income}</td>
                     <td>
                         <span class="badge bg-${getSpendingColor(customer.Spending_Score)}">
                             ${customer.Spending_Score}/100
@@ -43,7 +44,7 @@ async function loadCustomers() {
         } else {
             tableBody.innerHTML = `
                 <tr>
-                    <td colspan="7" class="text-center py-5">
+                    <td colspan="8" class="text-center py-5">
                         <i class="bi bi-inbox fs-1 text-muted"></i>
                         <p class="mt-2 text-muted">No customers found</p>
                     </td>
@@ -81,16 +82,24 @@ async function loadStats() {
 // Add New Customer
 // ========================================
 async function addCustomer() {
+    const name = document.getElementById('addName').value;
+    const email = document.getElementById('addEmail').value;
+    const password = document.getElementById('addPassword').value;
     const gender = document.getElementById('addGender').value;
-    const age = document.getElementById('addAge').value;
+    const year = document.getElementById('Year').value;
+    const month = document.getElementById('Month').value;
+    const day = document.getElementById('Day').value;
+    const roleId = document.getElementById('addRole').value;
     const income = document.getElementById('addIncome').value;
     const spending = document.getElementById('addSpending').value;
-    
-    if (!gender || !age || !income || !spending) {
-        showToast('Please fill all fields', 'warning');
+
+    if (!name || !email || !password || !gender || !year || !month || !day || !roleId || !income || !spending) {
+        showToast('Please fill all the requirements', 'warning');
         return;
     }
-    
+
+    const dateOfBirth = `${year}-${month}-${day}`;
+
     try {
         const response = await fetch(`${API_BASE_URL}/customers/`, {
             method: 'POST',
@@ -98,36 +107,39 @@ async function addCustomer() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                Name: name,
+                Email: email,
+                Password: password,
                 Gender: gender,
-                Age: parseInt(age),
+                DateofBirth: dateOfBirth,
+                RoleId: parseInt(roleId),
                 Annual_Income: parseInt(income),
                 Spending_Score: parseInt(spending)
             })
         });
-        
+
         const data = await response.json();
-        
+
         if (data.success) {
             showToast('Customer added successfully!', 'success');
-            
-            // Close modal
+
             const modal = bootstrap.Modal.getInstance(document.getElementById('addCustomerModal'));
             modal.hide();
-            
-            // Reset form
+
             document.getElementById('addCustomerForm').reset();
-            
-            // Reload data
+
             loadCustomers();
             loadStats();
         } else {
-            showToast('Failed to add customer', 'danger');
+            showToast(data.error || 'Failed to add customer, try again', 'danger');
         }
+
     } catch (error) {
         console.error('Error adding customer:', error);
         showToast('Failed to add customer', 'danger');
     }
 }
+
 
 // ========================================
 // Open Edit Modal
@@ -136,23 +148,18 @@ async function openEditModal(customerId) {
     try {
         const response = await fetch(`${API_BASE_URL}/customers/${customerId}`);
         const data = await response.json();
-        
-        if (data.success) {
-            const customer = data.data;
-            
-            document.getElementById('editCustomerId').value = customer.CustomerID;
-            document.getElementById('editGender').value = customer.Gender;
-            document.getElementById('editAge').value = customer.Age;
-            document.getElementById('editIncome').value = customer.Annual_Income;
-            document.getElementById('editSpending').value = customer.Spending_Score;
-            
-            // Show modal
-            const modal = new bootstrap.Modal(document.getElementById('editCustomerModal'));
-            modal.show();
-        }
+        const customer = data.data;
+        document.getElementById('editCustomerId').value = customer.CustomerID;
+        document.getElementById('editName').value = customer.Name || '';
+        document.getElementById('editRoleId').value = customer.RoleId;
+        document.getElementById('editGender').value = customer.Gender;      
+        document.getElementById('editIncome').value = customer.Annual_Income || 0;
+        document.getElementById('editSpending').value = customer.Spending_Score || 1;
+        const modal = new bootstrap.Modal(document.getElementById('editCustomerModal'));
+        modal.show();
     } catch (error) {
         console.error('Error loading customer:', error);
-        showToast('Failed to load customer data', 'danger');
+        showToast('Customer not exist?', 'danger');
     }
 }
 
@@ -161,11 +168,12 @@ async function openEditModal(customerId) {
 // ========================================
 async function updateCustomer() {
     const customerId = document.getElementById('editCustomerId').value;
+    const name = document.getElementById('editName').value;
     const gender = document.getElementById('editGender').value;
-    const age = document.getElementById('editAge').value;
+    const roleId = document.getElementById('editRoleId').value;
     const income = document.getElementById('editIncome').value;
     const spending = document.getElementById('editSpending').value;
-    
+
     try {
         const response = await fetch(`${API_BASE_URL}/customers/${customerId}`, {
             method: 'PUT',
@@ -173,8 +181,9 @@ async function updateCustomer() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                Name: name,
                 Gender: gender,
-                Age: parseInt(age),
+                RoleId: parseInt(roleId),
                 Annual_Income: parseInt(income),
                 Spending_Score: parseInt(spending)
             })
@@ -183,21 +192,18 @@ async function updateCustomer() {
         const data = await response.json();
         
         if (data.success) {
-            showToast('Customer updated successfully!', 'success');
-            
-            // Close modal
+            showToast('Customer updated successfully!', 'success');    
             const modal = bootstrap.Modal.getInstance(document.getElementById('editCustomerModal'));
             modal.hide();
             
-            // Reload data
             loadCustomers();
             loadStats();
         } else {
-            showToast('Failed to update customer', 'danger');
+            showToast(data.error || 'Failed to update the customer', 'warning');
         }
     } catch (error) {
         console.error('Error updating customer:', error);
-        showToast('Failed to update customer', 'danger');
+        showToast('Failed to process customers data', 'danger');
     }
 }
 
@@ -273,9 +279,26 @@ function showToast(message, type = 'success') {
 }
 
 // ========================================
+// Initialize Year Select Options
+// ========================================
+function initYearSelect() {
+    const yearSelect = document.getElementById('editYear');
+    const currentYear = new Date().getFullYear();
+    
+    // Clear existing options except the first placeholder
+    yearSelect.innerHTML = '<option value="" disabled selected hidden>Select</option>';
+    
+    // Add years from current year to 1940
+    for (let y = currentYear; y >= 1940; y--) {
+        yearSelect.innerHTML += `<option value="${y}">${y}</option>`;
+    }
+}
+
+// ========================================
 // Initialize on Page Load
 // ========================================
 document.addEventListener('DOMContentLoaded', function() {
     loadCustomers();
     loadStats();
+    initYearSelect();
 });

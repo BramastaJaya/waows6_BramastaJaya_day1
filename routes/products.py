@@ -74,7 +74,12 @@ def create_product():
     
     result = execute_query(
         query,
-        (data['Name'], data['CategoryID'], data['Price'], data['Stock']),
+        (
+            data['Name'], 
+            data['CategoryID'], 
+            data['Price'], 
+            data['Stock']
+        ),
         fetch_all=False
     )
     

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mall Surabaya - Sign Up</title>
+    <link rel="stylesheet" href="./../static/css/login-register.css">
+</head>
+<body>
+    <div class="container register-container">
+        <div class="register-layout">
+            <div class="illustration-section">
+                <div class="geometric-illustration">
+                    <svg viewBox="0 0 400 400" class="geometric-shapes">
+                        <circle cx="100" cy="100" r="40" fill="none" stroke="#333" stroke-width="3"/>
+                        <path d="M 250 80 L 320 180 L 180 180 Z" fill="none" stroke="#333" stroke-width="3"/>
+                        <path d="M 150 200 L 120 280 L 180 320 L 240 280 L 210 200 Z" fill="none" stroke="#333" stroke-width="3"/>
+                        <line x1="100" y1="100" x2="250" y2="80" stroke="#333" stroke-width="2"/>
+                        <line x1="180" y1="180" x2="150" y2="200" stroke="#333" stroke-width="2"/>
+                        <line x1="320" y1="180" x2="240" y2="280" stroke="#333" stroke-width="2"/>
+                        <rect x="100" y="350" width="15" height="15" fill="#333"/>
+                        <rect x="125" y="350" width="15" height="15" fill="#333"/>
+                        <rect x="150" y="350" width="15" height="15" fill="#333"/>
+                        <rect x="175" y="350" width="15" height="15" fill="#333"/>
+                        <circle cx="320" cy="320" r="35" fill="none" stroke="#333" stroke-width="3"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h2 class="form-title">Sign up to Mall Surabaya</h2>
+                
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="profileName">Your Name</label>
+                        <input 
+                            type="text" 
+                            id="profileName" 
+                            name="profileName" 
+                            placeholder="Enter your profile name"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input 
+                            type="email" 
+                            id="registerEmail" 
+                            name="email" 
+                            placeholder="Enter your email address"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="password" 
+                                id="registerPassword" 
+                                name="password" 
+                                placeholder="Enter your password"
+                                required
+                            >
+                            <button type="button" class="toggle-password" onclick="togglePassword('registerPassword')">
+                                <span class="hide-text">Hide</span>
+                            </button>
+                        </div>
+                        <p class="password-hint">Use 8 or more characters with a mix of letters, numbers & symbols</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>What's your gender? <span class="optional">(optional)</span></label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="gender" value="Female">
+                                <span class="radio-text">Female</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="gender" value="Male">
+                                <span class="radio-text">Male</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="gender" value="Prefer not to say">
+                                <span class="radio-text">Prefer not to say</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>What's your date of birth?</label>
+                        <div class="date-inputs">
+                            
+                            <div class="date-field">
+                                <label for="month" class="date-label">Month</label>
+                                <select id="month" name="month" required>
+                                    <option value="">Select</option>
+                                    <option value="01">January</option>
+                                    <option value="02">February</option>
+                                    <option value="03">March</option>
+                                    <option value="04">April</option>
+                                    <option value="05">May</option>
+                                    <option value="06">June</option>
+                                    <option value="07">July</option>
+                                    <option value="08">August</option>
+                                    <option value="09">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+
+                            <div class="date-field">
+                                <label for="day" class="date-label">Date</label>
+                                <select id="day" name="day" required>
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                            
+                            <div class="date-field">
+                                <label for="year" class="date-label">Year</label>
+                                <select id="year" name="year" required>
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary btn-signup">Sign up</button>
+                    
+                    <p class="login-link">
+                        Already have an account? <a href="/auth/login">Log in</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Genarate day and Year values for dropdown
+        const daySelect = document.getElementById('day');
+        const yearSelect = document.getElementById('year');
+
+        // list from day 1 untul day 31
+        for (let d = 1; d <= 31; d++) {
+            daySelect.innerHTML += `<option value="${String(d).padStart(2,'0')}">${d}</option>`;
+        }
+
+        // list from year 1940 until current year  
+        const currentYear = new Date().getFullYear();
+        for (let y = currentYear; y >= 1940; y--) {
+            yearSelect.innerHTML += `<option value="${y}">${y}</option>`;
+        }
+    </script>
+
+    <script src="./../static/js/script.js"></script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 // WAOW Season 6 - Main JavaScript
 // ========================================
 
-const API_BASE_URL = 'http://127.0.0.1:5000/api';
+const API_BASE_URL = 'http://127.0.0.1:5000/api/admin';
 
 // ========================================
 // Load Statistics on Landing Page
@@ -48,6 +48,24 @@ async function loadStats() {
         document.getElementById('totalRevenue').textContent = '--';
     }
 }
+
+// ========================================
+// Log Out from Landing Page
+// ========================================
+function handleLogout() {
+    if (confirm('Are you sure you want to log out?')) {
+        localStorage.clear();
+        sessionStorage.clear();
+        showToast('Logged out successfully!', 'success');
+        
+        setTimeout(() => {
+            // just to make sure :)
+            localStorage.removeItem("user");
+            window.location.href = '/auth/login';
+        }, 1000);
+    }
+}
+
 
 // ========================================
 // Initialize on Page Load

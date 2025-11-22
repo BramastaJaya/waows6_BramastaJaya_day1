@@ -36,18 +36,19 @@ def get_transaction(transaction_id):
     """Get single transaction with details"""
     # Get transaction header
     query_header = """
-        SELECT 
-            t.TransactionID,
-            t.CustomerID,
-            t.TransactionDate,
-            t.TotalAmount,
-            t.PaymentMethod,
-            c.Gender,
-            c.Age,
-            c.Annual_Income
-        FROM transactions t
-        LEFT JOIN mall_customer c ON t.CustomerID = c.CustomerID
-        WHERE t.TransactionID = %s
+    SELECT 
+        t.TransactionID,
+        t.CustomerID,
+        t.TransactionDate,
+        t.TotalAmount,
+        t.PaymentMethod,
+        u.Gender,
+        timestampdiff(YEAR, u.DateofBirth, CURDATE()) Age,
+        c.Annual_Income
+    FROM transactions t
+    LEFT JOIN mall_customer c ON t.CustomerID = c.CustomerID
+    LEFT JOIN users u ON c.UserId = u.UserId
+    WHERE t.TransactionID = %s;
     """
     transaction = execute_query(query_header, (transaction_id,), fetch_one=True)
     
@@ -123,18 +124,19 @@ def get_transaction_stats():
 def get_recent_transactions():
     """Get recent transactions (last 10)"""
     query = """
-        SELECT 
-            t.TransactionID,
-            t.CustomerID,
-            t.TransactionDate,
-            t.TotalAmount,
-            t.PaymentMethod,
-            c.Gender,
-            c.Age
-        FROM transactions t
-        LEFT JOIN mall_customer c ON t.CustomerID = c.CustomerID
-        ORDER BY t.TransactionDate DESC
-        LIMIT 10
+    SELECT 
+        t.TransactionID,
+        c.CustomerID,
+        t.TransactionDate,
+        t.TotalAmount,
+        t.PaymentMethod,
+        u.Gender,
+        TIMESTAMPDIFF(YEAR, u.DateofBirth, CURDATE()) AS Age
+    FROM mall_customer c
+    LEFT JOIN users u ON c.UserId = u.UserId
+    LEFT JOIN transactions t ON c.CustomerID = t.CustomerID
+    ORDER BY t.TransactionDate DESC
+    LIMIT 10;
     """
     transactions = execute_query(query)
     
@@ -147,21 +149,31 @@ def get_recent_transactions():
 def get_top_customers():
     """Get top customers by total spending"""
     query = """
-        SELECT 
-            c.CustomerID,
-            c.Gender,
-            c.Age,
-            c.Annual_Income,
-            c.Spending_Score,
-            COUNT(t.TransactionID) as total_transactions,
-            SUM(t.TotalAmount) as total_spent
-        FROM mall_customer c
-        LEFT JOIN transactions t ON c.CustomerID = t.CustomerID
-        GROUP BY c.CustomerID
-        ORDER BY total_spent DESC
-        LIMIT 10
+    SELECT 
+        c.CustomerID,
+        u.Gender,
+        TIMESTAMPDIFF(YEAR, u.DateofBirth, CURDATE()) AS Age,
+        c.Annual_Income,
+        COUNT(t.TransactionID) AS total_transactions,
+        SUM(t.TotalAmount) AS total_spent
+    FROM mall_customer c
+    LEFT JOIN users u ON c.UserId = u.UserId
+    LEFT JOIN transactions t ON c.CustomerID = t.CustomerID
+    GROUP BY 
+        c.CustomerID, 
+        u.Gender, 
+        u.DateofBirth,
+        c.Annual_Income
+    ORDER BY total_spent DESC
+    LIMIT 10;
     """
+    
     customers = execute_query(query)
+    
+    if not customers:
+        return jsonify({
+            'error': 'Database or Tables not found'
+        }), 500
     
     return jsonify({
         'success': True,

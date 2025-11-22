@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mall Surabaya - Sign In</title>
+    <link rel="stylesheet" href="./../static/css/login-register.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="title">Welcome to<br>Mall Surabaya</h1>
+        
+        <div class="form-container">
+            <h2 class="form-title">Sign In</h2>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <div class="input-wrapper">
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="Enter your email address"
+                            required
+                        >
+                        <button type="button" class="dropdown-btn">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Your password</label>
+                    <div class="input-wrapper">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            placeholder="Enter your password"
+                            required
+                        >
+                        <button type="button" class="toggle-password" onclick="togglePassword('password')">
+                            <span class="hide-text">Hide</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-primary">Log in</button>
+            </form>
+        </div>
+        
+        <a href="/auth/register" class="btn-secondary">Create an account</a>
+    </div>
+    
+    <script src="./../static/js/script.js"></script>
+</body>
+</html>

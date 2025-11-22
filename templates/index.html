@@ -13,10 +13,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="/">
+            <a class="navbar-brand fw-bold" href="/admin">
                 <i class="bi bi-code-slash me-2"></i>WAOW Season 6
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -25,23 +24,24 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/">Home</a>
+                        <a class="nav-link active" href="/admin">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/customers-page">Customers</a>
+                        <a class="nav-link" href="/admin/customers">Customers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/products-page">Products</a>
+                        <a class="nav-link" href="/admin/products">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/transactions-page">Transactions</a>
+                        <a class="nav-link" href="/admin/transactions">Transactions</a>
                     </li>
                 </ul>
+                <button class="btn btn-light" id="logoutBtn" onclick="handleLogout()">
+                    <i class="bi bi-box-arrow-right me-2"></i>Log Out
+                </button>
             </div>
         </div>
     </nav>
-
-    <!-- Hero Section -->
     <header class="hero-section text-white text-center">
         <div class="container py-5">
             <div class="row align-items-center min-vh-75">
@@ -57,10 +57,10 @@
                             Learn Flask RESTful API, CRUD Operations & Frontend Integration
                         </p>
                         <div class="d-flex justify-content-center gap-3 mb-4 animate-fade-in-delay-3">
-                            <a href="/customers-page" class="btn btn-light btn-lg px-4">
+                            <a href="/admin/customers" class="btn btn-light btn-lg px-4">
                                 <i class="bi bi-people-fill me-2"></i>Manage Customers
                             </a>
-                            <a href="/products-page" class="btn btn-outline-light btn-lg px-4">
+                            <a href="/admin/products" class="btn btn-outline-light btn-lg px-4">
                                 <i class="bi bi-box-seam me-2"></i>Manage Products
                             </a>
                         </div>
@@ -69,8 +69,6 @@
             </div>
         </div>
     </header>
-
-    <!-- Features Section -->
     <section class="py-5 bg-light">
         <div class="container">
             <h2 class="text-center mb-5 fw-bold">What You'll Build Today</h2>
@@ -117,8 +115,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Stats Section -->
     <section class="py-5">
         <div class="container">
             <h2 class="text-center mb-5 fw-bold">System Overview</h2>
@@ -162,27 +158,23 @@
             </div>
         </div>
     </section>
-
-    <!-- CTA Section -->
     <section class="py-5 bg-dark text-white">
         <div class="container text-center">
             <h2 class="mb-4 fw-bold">Ready to Get Started?</h2>
             <p class="lead mb-4">Explore the features and start managing your data!</p>
             <div class="d-flex justify-content-center gap-3 flex-wrap">
-                <a href="/customers-page" class="btn btn-primary btn-lg">
+                <a href="/admin/customers" class="btn btn-primary btn-lg">
                     <i class="bi bi-people-fill me-2"></i>Go to Customers
                 </a>
-                <a href="/products-page" class="btn btn-success btn-lg">
+                <a href="/admin/products" class="btn btn-success btn-lg">
                     <i class="bi bi-box-seam me-2"></i>Go to Products
                 </a>
-                <a href="/transactions-page" class="btn btn-info btn-lg">
+                <a href="/admin/transactions" class="btn btn-info btn-lg">
                     <i class="bi bi-receipt me-2"></i>View Transactions
                 </a>
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
     <footer class="bg-dark text-white text-center py-4">
         <div class="container">
             <p class="mb-2">&copy; 2025 WAOW Season 6 - Flask Workshop</p>

@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🛒 E-Commerce Platform
+# 🛒 Simple E-Commerce Platform
 
 [![Flask](https://img.shields.io/badge/Flask-2.3.0-green?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-blue?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
